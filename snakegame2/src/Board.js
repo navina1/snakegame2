@@ -40,7 +40,7 @@ function Board() {
         newRows[food.x][food.y] = "food";
         setRows(newRows);
     };
-    const [reset,setReset]=useState(false)
+    
     
     function useIntervel(callback, delay) {
         const savedCallback = useRef();
@@ -129,6 +129,14 @@ function Board() {
         
     };
     useIntervel(moveSnake, 350);
+    const snakeReset = () => {
+        for (let i = 0; i < score; i++){
+            snake.pop()
+        }
+        setScore(0);
+        setStart(true);
+
+    }
     return (
         <div>
             { <div>
@@ -138,7 +146,7 @@ function Board() {
             }
             {!start && <div style={{  background: "red", width: "600px", marginLeft: "480px", height: "150px", textAlign: "center" ,display:"flex",flexDirection:"column",justifyContent:"center",alignItems:"center"}}>
                 <label style={{ fontSize: "50px", color: "white" }}>Game Over</label>
-                <button style={{ width: "150px", height: "40px", fontSize: "17px", borderRadius: "5px", cursor: "pointer" }} onClick={() => { setScore(0); setStart(true);}}>Restart</button>
+                <button style={{ width: "150px", height: "40px", fontSize: "17px", borderRadius: "5px", cursor: "pointer" }} onClick={() => { snakeReset()}}>Restart</button>
             </div>}
         </div>
     )
